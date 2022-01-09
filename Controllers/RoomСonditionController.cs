@@ -13,11 +13,18 @@ public class RoomСonditionController : ControllerBase
          _context = context;
     }
     
-    [HttpGet(Name = "GetRoomState")]
+    [HttpGet("GetRoomState")]
     public RoomInfo GetRoomState()
     {
         return _context.RoomInfo.OrderBy(info => info.DateLastCheckState).Last();
     }
+    
+    [HttpGet("GetRoomStatistic")]
+    public List<RoomInfo> GetRoomStatistic()
+    {
+        return _context.RoomInfo.OrderBy(info => info.DateLastCheckState).ToList();
+    }
+
     
     
     [HttpPost]
