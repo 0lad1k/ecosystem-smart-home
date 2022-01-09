@@ -1,0 +1,38 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using ecosystem_smart_home_rest_api;
+namespace EcosystemSmartHome.Controllers;
+
+
+[ApiController]
+[Route("[controller]")]
+public class RoomСonditionController : ControllerBase
+{
+    private readonly SmartHomeContext _context;
+    public RoomСonditionController(SmartHomeContext context)
+    {
+         _context = context;
+    }
+    
+    [HttpGet(Name = "GetRoomState")]
+    public RoomInfo GetRoomState()
+    {
+        return _context.RoomInfo.OrderBy(info => info.DateLastCheckState).Last();
+    }
+    
+    
+    [HttpPost]
+    public IActionResult PostRoomState(RoomInfoDto roomInfo)
+    {
+        var info = new RoomInfo
+            {
+                Humidity = roomInfo.Humidity,
+                Temperature = roomInfo.Temperature,
+                DateLastCheckState = DateTime.Now.ToUniversalTime()
+            };
+            _context.Add(info);
+            _context.SaveChanges();
+            return StatusCode(200);
+    }
+    
+    
+}
