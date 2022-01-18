@@ -34,6 +34,8 @@ public class RoomСonditionController : ControllerBase
             {
                 Humidity = roomInfo.Humidity,
                 Temperature = roomInfo.Temperature,
+                Luminosity = roomInfo.Humidity,
+                Pressure = roomInfo.Pressure,
                 DateLastCheckState = DateTime.Now.ToUniversalTime()
             };
             _context.Add(info);

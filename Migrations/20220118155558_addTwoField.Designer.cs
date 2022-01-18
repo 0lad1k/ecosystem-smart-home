@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ecosystem_smart_home_rest_api;
@@ -11,9 +12,10 @@ using ecosystem_smart_home_rest_api;
 namespace EcosystemSmartHome.Migrations
 {
     [DbContext(typeof(SmartHomeContext))]
-    partial class SmartHomeContextModelSnapshot : ModelSnapshot
+    [Migration("20220118155558_addTwoField")]
+    partial class addTwoField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
