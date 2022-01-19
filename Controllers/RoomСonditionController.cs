@@ -19,10 +19,35 @@ public class RoomСonditionController : ControllerBase
         return _context.RoomInfo.OrderBy(info => info.DateLastCheckState).Last();
     }
     
-    [HttpGet("GetRoomStatistic")]
-    public List<RoomInfo> GetRoomStatistic()
+    [HttpGet("GetRoomStatisticByCurrentMonth")]
+    public List<RoomInfo> GetRoomStatisticByCurrentMonth()
     {
-        return _context.RoomInfo.OrderBy(info => info.DateLastCheckState).ToList();
+        DateTime currentDate = DateTime.Now;
+        return _context.RoomInfo.OrderBy(info => info.DateLastCheckState)
+            .Where(date => date.DateLastCheckState.Month == currentDate.Month 
+                           && currentDate.Year == date.DateLastCheckState.Year)
+            .ToList();
+    }
+    
+    [HttpGet("GetRoomStatisticByWeek")]
+    public List<RoomInfo> GetRoomStatisticByWeek()
+    {
+        DateTime currentDate = DateTime.Now;
+        return _context.RoomInfo.OrderBy(info => info.DateLastCheckState)
+            .Where(date => date.DateLastCheckState.Month == currentDate.Month 
+                           && currentDate.Year == date.DateLastCheckState.Year && date.DateLastCheckState.Day >=  currentDate.Day - 7)
+            .ToList();
+    }
+    
+    
+    [HttpGet("GetRoomStatisticByLastMonth")]
+    public List<RoomInfo> GetRoomStatisticByLastMonth()
+    {
+        DateTime currentDate = DateTime.Now;
+        return _context.RoomInfo.OrderBy(info => info.DateLastCheckState)
+            .Where(date => date.DateLastCheckState.Month == currentDate.AddMonths(-1).Month 
+                           && currentDate.Year == date.DateLastCheckState.Year)
+            .ToList();
     }
 
     
