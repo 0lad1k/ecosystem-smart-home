@@ -35,7 +35,7 @@ public class RoomСonditionController : ControllerBase
         DateTime currentDate = DateTime.Now;
         return _context.RoomInfo.OrderBy(info => info.DateLastCheckState)
             .Where(date => date.DateLastCheckState.Month == currentDate.Month 
-                           && currentDate.Year == date.DateLastCheckState.Year && date.DateLastCheckState.Day >=  currentDate.Day - 7)
+                           && currentDate.Year == date.DateLastCheckState.Year && date.DateLastCheckState.Day >  currentDate.Day - 7)
             .ToList();
     }
     
