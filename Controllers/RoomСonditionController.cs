@@ -39,6 +39,16 @@ public class RoomСonditionController : ControllerBase
             .ToList();
     }
     
+    [HttpGet("GetRoomStatisticToday")]
+    public List<RoomInfo> GetRoomStatisticToday()
+    {
+        DateTime currentDate = DateTime.Now;
+        return _context.RoomInfo.OrderBy(info => info.DateLastCheckState)
+            .Where(date => date.DateLastCheckState.Month == currentDate.Month 
+                           && currentDate.Year == date.DateLastCheckState.Year 
+                           && currentDate.Day == date.DateLastCheckState.Day)
+            .ToList();
+    }
     
     [HttpGet("GetRoomStatisticByLastMonth")]
     public List<RoomInfo> GetRoomStatisticByLastMonth()
