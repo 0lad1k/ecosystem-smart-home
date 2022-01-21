@@ -1,10 +1,5 @@
-using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+using EcosystemSmartHome.Service;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
 namespace ecosystem_smart_home_rest_api
@@ -34,6 +29,7 @@ namespace ecosystem_smart_home_rest_api
             );
 
             services.AddScoped<RoomInfo>();
+            services.AddHostedService<ClearDbService>();
 
         }
 
