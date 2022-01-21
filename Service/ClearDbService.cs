@@ -9,7 +9,7 @@ public class ClearDbService: BackgroundService
     private DateTime _nextRun;
     private readonly IServiceScopeFactory _scopeFactory;
 
-    private  string Schedule => "0 0 1 */2 *"; //Runs every 10 seconds
+    private  string Schedule => " 0 0 0 1 */2 *"; //Runs every 10 seconds
 
     public ClearDbService( IServiceScopeFactory scopeFactory)
     {
